@@ -27,6 +27,8 @@ const mongoSanitize = require("express-mongo-sanitize");
 const notFoundMiddleware = require("./middleware/not-found");
 const errorHandlerMiddleware = require("./middleware/error-handler");
 
+app.use(express.static("./public"));
+
 app.set("proxy", 1);
 app.use(
   rateLimiter({
@@ -43,7 +45,7 @@ app.use(express.json());
 app.use(cookieParser(process.env.JWT_SECRET));
 app.use(cors());
 
-app.use(express.static("./public"));
+
 app.use(fileUpload());
 
 app.get("/api/v1", (req, res) => {
